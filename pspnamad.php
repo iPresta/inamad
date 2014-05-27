@@ -6,7 +6,7 @@ class PSPNamad extends Module
 	{
 		$this->name = 'pspnamad';
 		$this->description = '';
-
+		parent::__construct();
 	}
 
 	public function install()
