@@ -5,6 +5,7 @@ class PSPNamad extends Module
 	public function __construct()
 	{
 		$this->name = 'pspnamad';
+		$this->displayName = 'E namad';
 		$this->description = '';
 		parent::__construct();
 	}
