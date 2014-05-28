@@ -8,7 +8,7 @@ class PSPNamad extends Module
     public function __construct()
     {
         $this->name = 'pspnamad';
-        $this->tab = 'other';
+        $this->tab = 'payment_security';
         $this->version = '1.0';
         $this->author = 'PSI - PrestaShop.ir';
         $this->need_instance = 0;
