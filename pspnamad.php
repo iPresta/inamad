@@ -28,6 +28,8 @@ class PSPNamad extends Module
         Configuration::updateValue('PSP_ENAMAD_POSITION', 'right');
         Configuration::updateValue('PSP_ENAMAD_W', 125);
         Configuration::updateValue('PSP_ENAMAD_H', 140);
+        Configuration::updateValue('PSP_ENAMAD_ZOOM', 0);
+
 
 
         if (!parent::install()
@@ -53,26 +55,22 @@ class PSPNamad extends Module
         $iframe = '';
         if (Tools::getValue('submit'.$this->name))
         {
-            if(validate::isCleanHtml(Tools::getValue('iframe_code'),true))
-            {
-                $iframe = Tools::getValue('iframe_code');
-                $text = Tools::getValue('namad_text');
-                $width = (int)Tools::getValue('namad_width');
-                $height = (int)Tools::getValue('namad_height');
-                $position = Tools::getValue('namad_position');
-				$zoom = Tools::getValue('zoom');
+           
+			$iframe = Tools::getValue('iframe_code');
+			$text = Tools::getValue('namad_text');
+			$width = (int)Tools::getValue('namad_width');
+			$height = (int)Tools::getValue('namad_height');
+			$position = Tools::getValue('namad_position');
+			$zoom = Tools::getValue('namad_zoom');
 
-                Configuration::updateValue('PSP_ENAMAD_IFRAME', $iframe);
-                Configuration::updateValue('PSP_ENAMAD_TEXT', $text);
-                Configuration::updateValue('PSP_ENAMAD_POSITION', $position);
-                Configuration::updateValue('PSP_ENAMAD_W', $width);
-                Configuration::updateValue('PSP_ENAMAD_H', $height);
-				Configuration::updateValue('PSP_ENAMAD_ZOOM', $zoom);
+			Configuration::updateValue('PSP_ENAMAD_IFRAME', $iframe);
+			Configuration::updateValue('PSP_ENAMAD_TEXT', $text);
+			Configuration::updateValue('PSP_ENAMAD_POSITION', $position);
+			Configuration::updateValue('PSP_ENAMAD_W', $width);
+			Configuration::updateValue('PSP_ENAMAD_H', $height);
+			Configuration::updateValue('PSP_ENAMAD_ZOOM', $zoom);
 
-                $output .= $this->displayConfirmation($this->l('Your settings have been updated.'));
-            }
-            else
-                $output = $this->displayError($this->l('Your iframe code is not clean.'));
+			$output .= $this->displayConfirmation($this->l('Your settings have been updated.'));
         }
         return $output.$this->displayForm();
     }
@@ -96,7 +94,7 @@ class PSPNamad extends Module
                     'name' => 'iframe_code',
                     'cols' => 60,
                     'rows' => 8,
-                    'required' => true
+                    'required' => true,
                 ),
                 array(
                     'type' => 'text',
@@ -110,7 +108,6 @@ class PSPNamad extends Module
 					'label' => $this->l('Namad Zoom out'),
 					'name' => 'namad_text',
 					'size' => 2,
-					'value' => '0',
 					'required' => true
 				),
                 array(
@@ -131,36 +128,35 @@ class PSPNamad extends Module
                     'type' => 'radio',
                     'label' => $this->l('Enamad position'),
                     'name' => 'namad_position',
-                    'size' => 20,
                     'required' => true,
                     'br' => true,
                     'class' => 't',
                     'values' => array(
                         array(
-                            'id' => 'top',
+                            'id' => 'pos_top',
                             'value' => 'top',
                             'label' => $this->l('Top position in home page')
                         ),
                         array(
-                            'id' => 'home',
+                            'id' => 'pos_home',
                             'value' => 'home',
                             'label' => $this->l('Middle of home page')
                         ),
                         array(
-                            'id' => 'right',
+                            'id' => 'pos_right',
                             'value' => 'right',
                             'label' => $this->l('right column of home page')
                         ),
                         array(
-                            'id' => 'left',
+                            'id' => 'pos_left',
                             'value' => 'left',
                             'label' => $this->l('left column of home page')
                         ),
 						array(
-							'id' => 'footer',
+							'id' => 'pos_footer',
 							'value' => 'footer',
 							'label' => $this->l('footer position')
-						)
+						),
                     )
                 )
             ),
@@ -209,7 +205,7 @@ class PSPNamad extends Module
 
     public function hookDisplayHeader()
     {
-		$zoom = 1 - 100 / Configuration::get('PSP_ENAMAD_ZOOM');
+		$zoom = 1 - Configuration::get('PSP_ENAMAD_ZOOM') / 100;
 		$this->context->smarty->assign('zoom', $zoom);
 		return $this->display(__FILE__,'resizer.tpl');
     }
