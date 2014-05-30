@@ -15,7 +15,8 @@ class PSPNamad extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->l('E_namad module');
+        $this->bootstrap = true;
+		$this->displayName = $this->l('E_namad module');
         $this->description = $this->l('Displays E_namad in your shop.');
         $this->ps_versions_compliancy = array('min' => '1.5', 'max' => _PS_VERSION_);
     }
@@ -28,12 +29,14 @@ class PSPNamad extends Module
         Configuration::updateValue('PSP_ENAMAD_W', 125);
         Configuration::updateValue('PSP_ENAMAD_H', 140);
 
+
         if (!parent::install()
             || !$this->registerHook('displayHeader')
             || !$this->registerHook('displayHome')
             || !$this->registerHook('displayLeftColumn')
             || !$this->registerHook('displayRightColumn')
             || !$this->registerHook('displayTop')
+			|| !$this->registerHook('displayFooter')
         )
             return false;
         return true;
@@ -57,12 +60,14 @@ class PSPNamad extends Module
                 $width = (int)Tools::getValue('namad_width');
                 $height = (int)Tools::getValue('namad_height');
                 $position = Tools::getValue('namad_position');
+				$zoom = Tools::getValue('zoom');
 
                 Configuration::updateValue('PSP_ENAMAD_IFRAME', $iframe);
                 Configuration::updateValue('PSP_ENAMAD_TEXT', $text);
                 Configuration::updateValue('PSP_ENAMAD_POSITION', $position);
                 Configuration::updateValue('PSP_ENAMAD_W', $width);
                 Configuration::updateValue('PSP_ENAMAD_H', $height);
+				Configuration::updateValue('PSP_ENAMAD_ZOOM', $zoom);
 
                 $output .= $this->displayConfirmation($this->l('Your settings have been updated.'));
             }
@@ -74,6 +79,9 @@ class PSPNamad extends Module
 
     public function displayForm()
     {
+        //@todo : adding description for fields
+		//@todo: adding namad preview in admin
+		//@todo: adding namad test picture for preview in front
         // Get default language
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
         // Init Fields form array
@@ -97,6 +105,14 @@ class PSPNamad extends Module
                     'size' => 80,
                     'required' => true
                 ),
+				array(
+					'type' => 'text',
+					'label' => $this->l('Namad Zoom out'),
+					'name' => 'namad_text',
+					'size' => 2,
+					'value' => '0',
+					'required' => true
+				),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Namad width'),
@@ -139,7 +155,12 @@ class PSPNamad extends Module
                             'id' => 'left',
                             'value' => 'left',
                             'label' => $this->l('left column of home page')
-                        )
+                        ),
+						array(
+							'id' => 'footer',
+							'value' => 'footer',
+							'label' => $this->l('footer position')
+						)
                     )
                 )
             ),
@@ -181,13 +202,16 @@ class PSPNamad extends Module
         $helper->fields_value['namad_width'] = Configuration::get('PSP_ENAMAD_W');
         $helper->fields_value['namad_height'] = Configuration::get('PSP_ENAMAD_H');
         $helper->fields_value['namad_position'] = Configuration::get('PSP_ENAMAD_POSITION');
+		$helper->fields_value['namad_position'] = Configuration::get('PSP_ENAMAD_ZOOM');
 
         return $helper->generateForm($fields_form);
     }
 
     public function hookDisplayHeader()
     {
-
+		$zoom = 1 - 100 / Configuration::get('PSP_ENAMAD_ZOOM');
+		$this->context->smarty->assign('zoom', $zoom);
+		return $this->display(__FILE__,'resizer.tpl');
     }
 
     public function hookDisplayHome()
@@ -229,9 +253,19 @@ class PSPNamad extends Module
         }
         return;
     }
+
+	public function hookDisplayFooter()
+	{
+		if (Configuration::get('PSP_ENAMAD_POSITION') == 'footer')
+		{
+			$this->setMedia();
+			return $this->display(__FILE__,'namad.tpl');
+		}
+		return;
+	}
     public function setMedia()
     {
-        $this->context->controller->addJS($this->_path.'views/js/namad.js', 'media');
+        //$this->context->controller->addJS($this->_path.'views/js/namad.js', 'media');
         $this->context->controller->addCSS($this->_path.'views/css/namad.css', 'media');
     }
 }
