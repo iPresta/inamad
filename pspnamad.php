@@ -62,7 +62,7 @@ class PSPNamad extends Module
 			$height = (int)Tools::getValue('namad_height');
 			$position = Tools::getValue('namad_position');
 			$zoom = Tools::getValue('namad_zoom');
-			p($iframe);
+			
 			Configuration::updateValue('PSP_ENAMAD_IFRAME', $iframe, true);
 			Configuration::updateValue('PSP_ENAMAD_TEXT', $text);
 			Configuration::updateValue('PSP_ENAMAD_POSITION', $position);
