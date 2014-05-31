@@ -62,8 +62,8 @@ class PSPNamad extends Module
 			$height = (int)Tools::getValue('namad_height');
 			$position = Tools::getValue('namad_position');
 			$zoom = Tools::getValue('namad_zoom');
-
-			Configuration::updateValue('PSP_ENAMAD_IFRAME', $iframe);
+			p($iframe);
+			Configuration::updateValue('PSP_ENAMAD_IFRAME', $iframe, true);
 			Configuration::updateValue('PSP_ENAMAD_TEXT', $text);
 			Configuration::updateValue('PSP_ENAMAD_POSITION', $position);
 			Configuration::updateValue('PSP_ENAMAD_W', $width);
@@ -198,7 +198,7 @@ class PSPNamad extends Module
         $helper->fields_value['namad_width'] = Configuration::get('PSP_ENAMAD_W');
         $helper->fields_value['namad_height'] = Configuration::get('PSP_ENAMAD_H');
         $helper->fields_value['namad_position'] = Configuration::get('PSP_ENAMAD_POSITION');
-		$helper->fields_value['namad_position'] = Configuration::get('PSP_ENAMAD_ZOOM');
+		//$helper->fields_value['namad_zoom'] = Configuration::get('PSP_ENAMAD_ZOOM');
 
         return $helper->generateForm($fields_form);
     }
