@@ -10,6 +10,7 @@
         var pspnamadheight = '{Configuration::get('PSP_ENAMAD_H')}';
     </script>
     <div id="pspnamad" {if $block}class="block"{/if}>
-            {Configuration::get('PSP_ENAMAD_IFRAME')}
+            {if $block}<p class="title_block">{Configuration::get('PSP_ENAMAD_TEXT')}</p>{/if}
+			{Configuration::get('PSP_ENAMAD_IFRAME')}
     </div>
 {/if}
