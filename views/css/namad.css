@@ -1,3 +1,7 @@
 #pspnamad{
     text-align: center;
 }
+#footer #pspnamad{
+    float: right;
+    padding: 15px 10px;
+}

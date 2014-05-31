@@ -5,11 +5,7 @@
     {else}
         {$block = false}
     {/if}
-    <script type="text/javascript">
-        var pspnamadwidth = '{Configuration::get('PSP_ENAMAD_W')}';
-        var pspnamadheight = '{Configuration::get('PSP_ENAMAD_H')}';
-    </script>
-    <div id="pspnamad" {if $block}class="block"{/if}>
+    <div id="pspnamad" {if $block}class="block"{/if} style="width:{Configuration::get('PSP_ENAMAD_W')}px; height:{Configuration::get('PSP_ENAMAD_H')}px">
             {if $block}<p class="title_block">{Configuration::get('PSP_ENAMAD_TEXT')}</p>{/if}
 			{Configuration::get('PSP_ENAMAD_IFRAME')}
     </div>

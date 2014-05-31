@@ -80,6 +80,8 @@ class PSPNamad extends Module
         //@todo : adding description for fields
 		//@todo: adding namad preview in admin
 		//@todo: adding namad test picture for preview in front
+		//@todo: adding padding setting fpr dive
+		//@todo: adding an option to display namad in all pages
         // Get default language
         $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
         // Init Fields form array
@@ -205,7 +207,7 @@ class PSPNamad extends Module
 
     public function hookDisplayHeader()
     {
-		$zoom = 1 - Configuration::get('PSP_ENAMAD_ZOOM') / 100;
+		$zoom = 1 - (Configuration::get('PSP_ENAMAD_ZOOM') / 100);
 		$this->context->smarty->assign('zoom', $zoom);
 		return $this->display(__FILE__,'resizer.tpl');
     }
