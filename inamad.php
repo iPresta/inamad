@@ -3,14 +3,14 @@
 if (!defined('_PS_VERSION_'))
     exit;
 
-class PSPNamad extends Module
+class iNamad extends Module
 {
     public function __construct()
     {
-        $this->name = 'pspnamad';
+        $this->name = 'inamad';
         $this->tab = 'payment_security';
         $this->version = '1.0';
-        $this->author = 'PSI - PrestaShop.ir';
+        $this->author = 'PSI - ipresta.ir';
         $this->need_instance = 0;
 
         parent::__construct();
@@ -23,12 +23,12 @@ class PSPNamad extends Module
 
     public function install()
     {
-        Configuration::updateValue('PSP_ENAMAD_IFRAME', '');
-        Configuration::updateValue('PSP_ENAMAD_TEXT', '');
-        Configuration::updateValue('PSP_ENAMAD_POSITION', 'right');
-        Configuration::updateValue('PSP_ENAMAD_W', 125);
-        Configuration::updateValue('PSP_ENAMAD_H', 140);
-        Configuration::updateValue('PSP_ENAMAD_ZOOM', 0);
+        Configuration::updateValue('PSI_ENAMAD_IFRAME', '');
+        Configuration::updateValue('PSI_ENAMAD_TEXT', '');
+        Configuration::updateValue('PSI_ENAMAD_POSITION', 'right');
+        Configuration::updateValue('PSI_ENAMAD_W', 125);
+        Configuration::updateValue('PSI_ENAMAD_H', 140);
+        Configuration::updateValue('PSI_ENAMAD_ZOOM', 0);
 
 
 
@@ -63,12 +63,12 @@ class PSPNamad extends Module
 			$position = Tools::getValue('namad_position');
 			$zoom = Tools::getValue('namad_zoom');
 			
-			Configuration::updateValue('PSP_ENAMAD_IFRAME', $iframe, true);
-			Configuration::updateValue('PSP_ENAMAD_TEXT', $text);
-			Configuration::updateValue('PSP_ENAMAD_POSITION', $position);
-			Configuration::updateValue('PSP_ENAMAD_W', $width);
-			Configuration::updateValue('PSP_ENAMAD_H', $height);
-			Configuration::updateValue('PSP_ENAMAD_ZOOM', $zoom);
+			Configuration::updateValue('PSI_ENAMAD_IFRAME', $iframe, true);
+			Configuration::updateValue('PSI_ENAMAD_TEXT', $text);
+			Configuration::updateValue('PSI_ENAMAD_POSITION', $position);
+			Configuration::updateValue('PSI_ENAMAD_W', $width);
+			Configuration::updateValue('PSI_ENAMAD_H', $height);
+			Configuration::updateValue('PSI_ENAMAD_ZOOM', $zoom);
 
 			$output .= $this->displayConfirmation($this->l('Your settings have been updated.'));
         }
@@ -195,26 +195,26 @@ class PSPNamad extends Module
         );
 
         // Load current value
-        $helper->fields_value['iframe_code'] = Configuration::get('PSP_ENAMAD_IFRAME');
-        $helper->fields_value['namad_text'] = Configuration::get('PSP_ENAMAD_TEXT');
-        $helper->fields_value['namad_width'] = Configuration::get('PSP_ENAMAD_W');
-        $helper->fields_value['namad_height'] = Configuration::get('PSP_ENAMAD_H');
-        $helper->fields_value['namad_position'] = Configuration::get('PSP_ENAMAD_POSITION');
-		//$helper->fields_value['namad_zoom'] = Configuration::get('PSP_ENAMAD_ZOOM');
+        $helper->fields_value['iframe_code'] = Configuration::get('PSI_ENAMAD_IFRAME');
+        $helper->fields_value['namad_text'] = Configuration::get('PSI_ENAMAD_TEXT');
+        $helper->fields_value['namad_width'] = Configuration::get('PSI_ENAMAD_W');
+        $helper->fields_value['namad_height'] = Configuration::get('PSI_ENAMAD_H');
+        $helper->fields_value['namad_position'] = Configuration::get('PSI_ENAMAD_POSITION');
+		//$helper->fields_value['namad_zoom'] = Configuration::get('PSI_ENAMAD_ZOOM');
 
         return $helper->generateForm($fields_form);
     }
 
     public function hookDisplayHeader()
     {
-		$zoom = 1 - (Configuration::get('PSP_ENAMAD_ZOOM') / 100);
+		$zoom = 1 - (Configuration::get('PSI_ENAMAD_ZOOM') / 100);
 		$this->context->smarty->assign('zoom', $zoom);
 		return $this->display(__FILE__,'resizer.tpl');
     }
 
     public function hookDisplayHome()
     {
-        if (Configuration::get('PSP_ENAMAD_POSITION') == 'home')
+        if (Configuration::get('PSI_ENAMAD_POSITION') == 'home')
         {
             $this->setMedia();
             return $this->display(__FILE__,'namad.tpl');
@@ -224,7 +224,7 @@ class PSPNamad extends Module
 
     public function hookDisplayTop()
     {
-        if (Configuration::get('PSP_ENAMAD_POSITION') == 'top')
+        if (Configuration::get('PSI_ENAMAD_POSITION') == 'top')
         {
             $this->setMedia();
             return $this->display(__FILE__,'namad.tpl');
@@ -234,7 +234,7 @@ class PSPNamad extends Module
 
     public function hookDisplayLeftColumn()
     {
-        if (Configuration::get('PSP_ENAMAD_POSITION') == 'left')
+        if (Configuration::get('PSI_ENAMAD_POSITION') == 'left')
         {
             $this->setMedia();
             return $this->display(__FILE__,'namad.tpl');
@@ -244,7 +244,7 @@ class PSPNamad extends Module
 
     public function hookDisplayRightColumn()
     {
-        if (Configuration::get('PSP_ENAMAD_POSITION') == 'right')
+        if (Configuration::get('PSI_ENAMAD_POSITION') == 'right')
         {
             $this->setMedia();
             return $this->display(__FILE__,'namad.tpl');
@@ -254,7 +254,7 @@ class PSPNamad extends Module
 
 	public function hookDisplayFooter()
 	{
-		if (Configuration::get('PSP_ENAMAD_POSITION') == 'footer')
+		if (Configuration::get('PSI_ENAMAD_POSITION') == 'footer')
 		{
 			$this->setMedia();
 			return $this->display(__FILE__,'namad.tpl');
