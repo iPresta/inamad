@@ -18,7 +18,6 @@ class iNamad extends Module
         $this->bootstrap = true;
 		$this->displayName = $this->l('E_namad module');
         $this->description = $this->l('Displays E_namad in your shop.');
-        $this->ps_versions_compliancy = array('min' => '1.5', 'max' => _PS_VERSION_);
     }
 
     public function install()
