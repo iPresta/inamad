@@ -22,7 +22,7 @@ class iNamad extends Module
 
     public function install()
     {
-        Configuration::updateValue('PSI_ENAMAD_IFRAME', '');
+        //Configuration::updateValue('PSI_ENAMAD_IFRAME', '');
         Configuration::updateValue('PSI_ENAMAD_TEXT', '');
         Configuration::updateValue('PSI_ENAMAD_POSITION', 'right');
         Configuration::updateValue('PSI_ENAMAD_W', 125);
@@ -55,14 +55,14 @@ class iNamad extends Module
         if (Tools::getValue('submit'.$this->name))
         {
            
-			$iframe = Tools::getValue('iframe_code');
+			//$iframe = Tools::getValue('iframe_code');
 			$text = Tools::getValue('namad_text');
 			$width = (int)Tools::getValue('namad_width');
 			$height = (int)Tools::getValue('namad_height');
 			$position = Tools::getValue('namad_position');
 			$zoom = Tools::getValue('namad_zoom');
 			
-			Configuration::updateValue('PSI_ENAMAD_IFRAME', $iframe, true);
+			//Configuration::updateValue('PSI_ENAMAD_IFRAME', $iframe, true);
 			Configuration::updateValue('PSI_ENAMAD_TEXT', $text);
 			Configuration::updateValue('PSI_ENAMAD_POSITION', $position);
 			Configuration::updateValue('PSI_ENAMAD_W', $width);
@@ -89,14 +89,14 @@ class iNamad extends Module
                 'title' => $this->l('Settings'),
             ),
             'input' => array(
-                array(
+                /*array(
                     'type' => 'textarea',
                     'label' => $this->l('Iframe code'),
                     'name' => 'iframe_code',
                     'cols' => 60,
                     'rows' => 8,
                     'required' => true,
-                ),
+                ),*/
                 array(
                     'type' => 'text',
                     'label' => $this->l('Namad text'),
@@ -107,7 +107,7 @@ class iNamad extends Module
 				array(
 					'type' => 'text',
 					'label' => $this->l('Namad Zoom out'),
-					'name' => 'namad_text',
+					'name' => 'namad_zoom',
 					'size' => 2,
 					'required' => true
 				),
@@ -194,12 +194,12 @@ class iNamad extends Module
         );
 
         // Load current value
-        $helper->fields_value['iframe_code'] = Configuration::get('PSI_ENAMAD_IFRAME');
+        //$helper->fields_value['iframe_code'] = Configuration::get('PSI_ENAMAD_IFRAME');
         $helper->fields_value['namad_text'] = Configuration::get('PSI_ENAMAD_TEXT');
         $helper->fields_value['namad_width'] = Configuration::get('PSI_ENAMAD_W');
         $helper->fields_value['namad_height'] = Configuration::get('PSI_ENAMAD_H');
         $helper->fields_value['namad_position'] = Configuration::get('PSI_ENAMAD_POSITION');
-		//$helper->fields_value['namad_zoom'] = Configuration::get('PSI_ENAMAD_ZOOM');
+	$helper->fields_value['namad_zoom'] = Configuration::get('PSI_ENAMAD_ZOOM');
 
         return $helper->generateForm($fields_form);
     }
