@@ -1,6 +1,6 @@
 #iNamad
 ##E-Namad Module for #Prestashop
-### by ipresta.ir
+
 
 + سازگار با پرستاشاپ 1.6 و 1.5
 + سازگار با آخرین تغییرات سایت ای-نماد
@@ -8,3 +8,4 @@
 + قابلیت تنظیم طول و عرض آی-فریم
 + قابلیت کوچک نمایی نماد در صفحه
 
+### ipresta.ir - Prestashop Iran
