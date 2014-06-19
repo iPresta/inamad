@@ -9,7 +9,7 @@ class iNamad extends Module
     {
         $this->name = 'inamad';
         $this->tab = 'payment_security';
-        $this->version = '1.0';
+        $this->version = '1.2.0';
         $this->author = 'PSI - ipresta.ir';
         $this->need_instance = 0;
 
@@ -40,6 +40,8 @@ class iNamad extends Module
 			|| !$this->registerHook('displayFooter')
         )
             return false;
+		if (!@copy($this->getLocalPath().'/views/html/eNamadLogo.htm',_PS_ROOT_DIR_))
+			$this->adminDisplayWarning($this->l('Please copy eNamadLogo.htm file to the root of your shop'));
         return true;
     }
 
@@ -51,7 +53,9 @@ class iNamad extends Module
     public function getContent()
     {
         $output = '';
-        $iframe = '';
+        //$iframe = '';
+		if (!file_exists(_PS_ROOT_DIR_.'/eNamadLogo.htm'))
+			$this->adminDisplayWarning($this->l('Please copy eNamadLogo.htm file to the root of your shop'));
         if (Tools::getValue('submit'.$this->name))
         {
            
