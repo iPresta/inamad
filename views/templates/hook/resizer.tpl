@@ -1,5 +1,5 @@
 <style type="text/css">
-        #pspnamad{
+        #inamad{
             -webkit-transform: scale({$zoom});  /* Saf3.1+, Chrome */
             -moz-transform: scale({$zoom});  /* FF3.5+ */
             -ms-transform: scale({$zoom});  /* IE9 */

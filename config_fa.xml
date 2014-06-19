@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>inamad</name>
+	<displayName><![CDATA[ماژول ای - نماد]]></displayName>
+	<version><![CDATA[1.0]]></version>
+	<description><![CDATA[نمایش اینماد در فروشگاه شما]]></description>
+	<author><![CDATA[PSI - ipresta.ir]]></author>
+	<tab><![CDATA[payment_security]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

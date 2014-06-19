@@ -113,7 +113,8 @@ class iNamad extends Module
 					'label' => $this->l('Namad Zoom out'),
 					'name' => 'namad_zoom',
 					'size' => 2,
-					'required' => true
+					'required' => true,
+					'desc' => $this->l('For zoomout Namad logo fill out this field. Value is based percentage.')
 				),
                 array(
                     'type' => 'text',
