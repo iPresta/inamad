@@ -8,4 +8,4 @@
 + قابلیت تنظیم طول و عرض آی-فریم
 + قابلیت کوچک نمایی نماد در صفحه
 
-### ipresta.ir - Prestashop Iran
+### [ipresta.ir - Prestashop Iran](http://ipresta.ir)
