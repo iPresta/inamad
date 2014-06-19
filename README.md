@@ -1,6 +1,5 @@
 #iNamad
 ##E-Namad Module for #Prestashop
-========
 ### by ipresta.ir
 
 + سازگار با پرستاشاپ 1.6 و 1.5
